@@ -137,7 +137,7 @@ app.post('/addCheckinExcel', async (req, res) => {
     const chamadaWorkbook = await loadWorkbook(chamadaPath);
 
     const checkinSheet = checkinWorkbook.sheet(0);
-    const chamadaSheet = chamadaworkbook.sheet(0); // Sheet 1 conforme especificação
+    const chamadaSheet = chamadaWorkbook.sheet(0); // Sheet 1 conforme especificação
 
     const checkinData = getDataFromSheet(checkinSheet);
     const chamadaData = getDataFromSheet(chamadaSheet);
@@ -289,7 +289,7 @@ app.get('/updateChamadaExcel', async (req, res) => {
     const chamadaWorkbook = await loadWorkbook(chamadaPath);
 
     const checkinSheet = checkinWorkbook.sheet(0);
-    const chamadaSheet = chamadaworkbook.sheet(0); // Sheet 1 conforme especificação
+    const chamadaSheet = chamadaWorkbook.sheet(0); // Sheet 1 conforme especificação
 
     const checkinData = getDataFromSheet(checkinSheet);
     const chamadaData = getDataFromSheet(chamadaSheet);
@@ -365,7 +365,7 @@ app.post('/updateChamadaExcelFromRegisterForm', async (req, res) => {
       maritalStatus,
       nameSpouse,
       nameChilds,
-      memberIlan
+      memberIlan,
     } = req.body;
 
     const data = sheet.usedRange().value();
@@ -494,22 +494,22 @@ app.post('/updateChamadaExcelFromRegisterForm', async (req, res) => {
     }
     if (ministryTwo) {
       updateCell('AJ', ministryTwo);
-    }    
+    }
     if (ministryThree) {
       updateCell('AK', ministryThree);
-    }    
+    }
     if (maritalStatus) {
       updateCell('AL', maritalStatus);
-    }        
+    }
     if (nameSpouse) {
       updateCell('AM', nameSpouse);
-    }        
+    }
     if (nameChilds) {
       updateCell('AN', nameChilds);
-    }    
+    }
     if (memberIlan) {
       updateCell('AO', memberIlan);
-    }        
+    }
 
     await workbook.toFileAsync('./chamada.xlsx');
     res.status(200).send('Atualização concluída com sucesso');
